@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
@@ -33,12 +34,21 @@ class ApiController extends Controller
      * Show products of the selected category via api request
      *
      * @param $code
-     * @return array
+     * @return array|object
      */
     public function getCategoryProducts(string $code) : array
     {
         $category = Category::where('code', $code)->first();
+
+        if(empty($category)) {
+            return response(['Message' => 'Invalid request ( There is no category for this code )'], 400);
+        }
+
         $products = Product::where('category_id', $category->id)->get();
+
+        if(empty($products)) {
+            return response(['Message' => 'No products found in this category'], 404);
+        }
 
         return [
             'category' => $category,
@@ -50,11 +60,15 @@ class ApiController extends Controller
      * Show one product via api request
      *
      * @param $code
-     * @return mixed
+     * @return object
      */
     public function getProduct(string $code) : object
     {
         $product = Product::where('code', $code)->first();
+
+        if(empty($product)) {
+            return response(['Message' => 'Invalid request ( There is no product for this code )'], 400);
+        }
 
         return $product;
     }
@@ -69,6 +83,10 @@ class ApiController extends Controller
      */
     public function getSortProducts(string $filter, string $sort = null, int $paginate = null)
     {
+        if(empty($filter)) {
+            return response(['Message' => 'Invalid request ( Filter not passed )'], 400);
+        }
+
         if ($sort == null) {
             $sort = 'asc';
         }
