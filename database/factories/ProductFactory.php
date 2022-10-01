@@ -20,7 +20,7 @@ class ProductFactory extends Factory
 
         return [
             'category_id' => $randomCategory->id,
-            'code' => $randomCategory->code,
+            'code' => $this->faker->uuid(),
             'name' => "Shares of ".$this->faker->company(),
             'price' => $this->faker->numberBetween(),
             'qty' => $this->faker->numberBetween(10, 10000)
