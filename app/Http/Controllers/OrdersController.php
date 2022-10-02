@@ -40,7 +40,7 @@ class OrdersController extends Controller
      * @param OrderRequest $request
      * @return RedirectResponse
      */
-    public function createOrder(OrderRequest $request) : RedirectResponse
+    public function createOrder(OrderRequest $request): RedirectResponse
     {
         $validate = $request->validate([
             'product_name' => '|string|max:255|min:3',
@@ -58,6 +58,10 @@ class OrdersController extends Controller
         ];
 
         $response = Http::post(self::ORDER_CREATE_API_URL, $params);
+
+        if ($response->status() != 200) {
+            return redirect()->route('orders.show')->with('error', 'Проблеми зі створенням замовлення. Будь ласка, спробуйте ще раз');
+        }
 
         return redirect()->route('orders.show')->with('success', 'Замовлення успішно створено');
     }

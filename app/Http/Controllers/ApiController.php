@@ -16,7 +16,7 @@ class ApiController extends Controller
      *
      * @return object
      */
-    public function getAllProducts() : object
+    public function getAllProducts(): object
     {
         return Product::all();
     }
@@ -26,7 +26,7 @@ class ApiController extends Controller
      *
      * @return object
      */
-    public function getAllCategories() : object
+    public function getAllCategories(): object
     {
         return Category::all();
     }
@@ -37,17 +37,17 @@ class ApiController extends Controller
      * @param $code
      * @return array|object
      */
-    public function getCategoryProducts(string $code) : array
+    public function getCategoryProducts(string $code): array
     {
         $category = Category::where('code', $code)->first();
 
-        if(empty($category)) {
+        if (empty($category)) {
             return response(['Message' => 'Invalid request ( There is no category for this code )'], 400);
         }
 
         $products = Product::where('category_id', $category->id)->get();
 
-        if(empty($products)) {
+        if (empty($products)) {
             return response(['Message' => 'No products found in this category'], 404);
         }
 
@@ -63,11 +63,11 @@ class ApiController extends Controller
      * @param $code
      * @return object
      */
-    public function getProduct(string $code) : object
+    public function getProduct(string $code): object
     {
         $product = Product::where('code', $code)->first();
 
-        if(empty($product)) {
+        if (empty($product)) {
             return response(['Message' => 'Invalid request ( There is no product for this code )'], 400);
         }
 
@@ -84,7 +84,7 @@ class ApiController extends Controller
      */
     public function getSortProducts(string $filter, string $sort = null, int $paginate = null)
     {
-        if(empty($filter)) {
+        if (empty($filter)) {
             return response(['Message' => 'Invalid request ( Filter not passed )'], 400);
         }
 
@@ -100,7 +100,7 @@ class ApiController extends Controller
      *
      * @return object
      */
-    public function getOrdersList() : object
+    public function getOrdersList(): object
     {
         return Order::orderBy('id', 'desc')->get();
     }
@@ -121,7 +121,7 @@ class ApiController extends Controller
 
         $order = Order::create([
             'customer_id' => 123,
-            'customer_name' => $request->first_name.' '.$request->last_name,
+            'customer_name' => $request->first_name . ' ' . $request->last_name,
             'product_name' => $request->product_name,
             'qty' => $request->qty,
             'price' => $orderPrice
