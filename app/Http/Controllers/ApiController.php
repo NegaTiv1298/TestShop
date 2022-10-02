@@ -127,4 +127,14 @@ class ApiController extends Controller
             'price' => $orderPrice
         ]);
     }
+
+    public function editProduct(Request $request)
+    {
+        Product::where('code', $request->code)
+            ->update([
+                'name' => $request->product_name,
+                'price' => $request->price,
+                'qty' => $request->qty
+            ]);
+    }
 }

@@ -32,6 +32,10 @@ Route::get('/product/{code}', [ProductController::class, 'card'])
     ->name('product.card');
 Route::get('/product/buy/{code}', [ProductController::class, 'buy'])
     ->name('product.buy');
+Route::get('/product/edit/{code}', [ProductController::class, 'getEditView'])
+    ->name('product.edit');
+Route::post('/product/edit/post', [ProductController::class, 'edit'])
+    ->name('product.edit.post');
 Route::get('/orders', [OrdersController::class, 'showOrders'])
     ->name('orders.show');
 Route::post('/order/create', [OrdersController::class, 'createOrder'])

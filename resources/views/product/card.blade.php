@@ -22,6 +22,8 @@
                 </tbody>
             </table>
             <a href="{{ route('product.buy', [$product['code']]) }}">Купити</a>
+            <br>
+            <a href="{{ route('product.edit', [$product['code']]) }}">Редагувати</a>
         </div>
     </div>
 @stop

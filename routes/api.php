@@ -23,6 +23,7 @@ Route::get('/products/{pagination?}', [ApiController::class, 'getAllProducts']);
 Route::get('/categories', [ApiController::class, 'getAllCategories']);
 Route::get('/category/{code}', [ApiController::class, 'getCategoryProducts']);
 Route::get('/product/{code}', [ApiController::class, 'getProduct']);
+Route::post('/product/edit', [ApiController::class, 'editProduct']);
 Route::prefix('products/filter=')->group(function () {
     Route::get('/{filter}:{sort?}/{paginate?}', [ApiController::class, 'getSortProducts']);
 });
