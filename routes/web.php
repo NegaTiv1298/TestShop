@@ -23,5 +23,9 @@ Route::get('/', [MainController::class, 'show'])
     ->name('index');
 Route::get('/categories', [MainController::class, 'categories'])
     ->name('categories.show');
+Route::get('/category/{code}', [MainController::class, 'getCategory'])
+    ->name('category.show');
 Route::get('/product/list', [ProductController::class, 'show'])
     ->name('products.show');
+Route::get('/product/{code}', [ProductController::class, 'card'])
+    ->name('product.card');

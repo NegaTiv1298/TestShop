@@ -6,7 +6,7 @@
 
     <title>@yield('title')</title>
 
-    <link rel="stylesheet" href="<?php echo asset('/css/style.css')?>" type="text/css">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 

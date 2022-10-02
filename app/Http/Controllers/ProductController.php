@@ -11,6 +11,8 @@ class ProductController extends Controller
 {
     /** @var string */
     private const PRODUCTS_API_URL = 'http://testshop/api/v1/products';
+    /** @var string */
+    private const PRODUCT_API_URL = 'http://testshop/api/v1/product';
 
     /**
      * Show products list
@@ -24,6 +26,22 @@ class ProductController extends Controller
 
         return view('product/list', [
             'products' => $products
+        ]);
+    }
+
+    /**
+     * Show product card
+     *
+     * @param $code
+     * @return Application|Factory|View
+     * @throws GuzzleException
+     */
+    public function card($code)
+    {
+        $product = ConnectController::apiConnectAction('GET', self::PRODUCT_API_URL."/$code");
+
+        return view('product/card', [
+            'product' => $product
         ]);
     }
 }

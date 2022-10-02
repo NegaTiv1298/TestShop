@@ -11,6 +11,8 @@ class MainController extends Controller
 {
     /** @var string */
     private const CATEGORIES_API_URL = 'http://testshop/api/v1/categories';
+    /** @var string */
+    private const CATEGORY_API_URL = 'http://testshop/api/v1/category';
 
     /**
      * Show main page
@@ -36,6 +38,25 @@ class MainController extends Controller
 
         return view('product/categories', [
             'categories' => $categories
+        ]);
+    }
+
+    /**
+     * Show the selected category
+     *
+     * @param $code
+     * @throws GuzzleException
+     */
+    public function getCategory($code)
+    {
+        $response = ConnectController::apiConnectAction('GET', self::CATEGORY_API_URL."/$code");
+
+        $category = $response['category'];
+        $products = $response['products'];
+
+        return view('product/category', [
+            'category' => $category,
+            'products' => $products
         ]);
     }
 }

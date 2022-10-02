@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Товари')
+@section('title', $category['name'])
 @section('content')
-    <div class="container" align="center">
-        <h1>Всі товари</h1>
-        <div class="starter-template">
+    <div class="container">
+        <div class="starter-template" align="center">
+            <h1>{{$category['name']}}</h1>
             <div class="row">
                 @foreach($products as $product)
                     <div class="col-md-auto">

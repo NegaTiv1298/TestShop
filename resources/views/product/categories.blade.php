@@ -5,7 +5,7 @@
         <div class="starter-template" align="center">
             @foreach($categories as $category)
                 <div class="panel">
-                    <a href="{{$category['code']}}">
+                    <a href="{{ route('category.show', ['code' => $category['code']] ) }}">
                         <h2>{{$category['name']}}</h2>
                     </a>
                 </div>
