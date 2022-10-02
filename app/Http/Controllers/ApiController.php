@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Order;
@@ -92,5 +93,38 @@ class ApiController extends Controller
         }
 
         return Product::orderBy($filter, $sort)->paginate($paginate);
+    }
+
+    /**
+     * Show orders via api request
+     *
+     * @return object
+     */
+    public function getOrdersList() : object
+    {
+        return Order::orderBy('id', 'desc')->get();
+    }
+
+    /**
+     * Create order via api request
+     *
+     * @param Request $request
+     */
+    public function createOrder(Request $request)
+    {
+        $product = Product::where('code', $request->code)->first();
+        $productPrice = $product->price;
+        $orderPrice = $productPrice * $request->qty;
+
+        $product->qty = $product->qty - $request->qty;
+        $product->save();
+
+        $order = Order::create([
+            'customer_id' => 123,
+            'customer_name' => $request->first_name.' '.$request->last_name,
+            'product_name' => $request->product_name,
+            'qty' => $request->qty,
+            'price' => $orderPrice
+        ]);
     }
 }

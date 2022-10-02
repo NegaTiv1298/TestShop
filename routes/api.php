@@ -26,3 +26,5 @@ Route::get('/product/{code}', [ApiController::class, 'getProduct']);
 Route::prefix('products/filter=')->group(function () {
     Route::get('/{filter}:{sort?}/{paginate?}', [ApiController::class, 'getSortProducts']);
 });
+Route::get('/orders', [ApiController::class, 'getOrdersList']);
+Route::post('/order/create', [ApiController::class, 'createOrder']);

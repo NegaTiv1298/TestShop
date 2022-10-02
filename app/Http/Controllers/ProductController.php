@@ -44,4 +44,20 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+
+    /**
+     * Show page with the order creation form
+     *
+     * @param $code
+     * @return Application|Factory|View
+     * @throws GuzzleException
+     */
+    public function buy($code)
+    {
+        $product = ConnectController::apiConnectAction('GET', self::PRODUCT_API_URL."/$code");
+
+        return view('order/create', [
+           'product' => $product
+        ]);
+    }
 }

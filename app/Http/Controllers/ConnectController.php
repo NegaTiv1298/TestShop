@@ -13,18 +13,27 @@ class ConnectController extends Controller
      *
      * @param string $httpMethod
      * @param string $apiUrl
+     * @param array|null $postParams
      * @return array
      * @throws GuzzleExceptionAlias
      */
-    public static function apiConnectAction(string $httpMethod, string $apiUrl): array
+    public static function apiConnectAction(string $httpMethod, string $apiUrl, array $postParams = null): array
     {
         $client = new Client();
         $headers = [
             'Content-type' => 'application/json',
         ];
-        $response = $client->request($httpMethod, $apiUrl, [
-            'headers' => $headers
-        ]);
+
+        if(!empty($postParams)) {
+            $response = $client->request($httpMethod, $apiUrl, [
+                'headers' => $headers,
+                'params' => $postParams
+            ]);
+        } else {
+            $response = $client->request($httpMethod, $apiUrl, [
+                'headers' => $headers
+            ]);
+        }
 
         $result = json_decode($response->getBody()->getContents(), true);
 

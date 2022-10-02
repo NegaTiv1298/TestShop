@@ -25,6 +25,7 @@
             <a class="navbar-brand" href="{{ route('index') }}">Головна</a>
             <a class="navbar-brand" href="{{ route('products.show') }}">Товари</a>
             <a class="navbar-brand" href="{{ route('categories.show') }}">Категорії</a>
+            <a class="navbar-brand" href="{{ route('orders.show') }}">Замовлення</a>
         </div>
     </nav>
 </div>

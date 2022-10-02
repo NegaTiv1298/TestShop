@@ -21,7 +21,7 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="#">Купити</a>
+            <a href="{{ route('product.buy', [$product['code']]) }}">Купити</a>
         </div>
     </div>
 @stop

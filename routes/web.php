@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,9 @@ Route::get('/product/list', [ProductController::class, 'show'])
     ->name('products.show');
 Route::get('/product/{code}', [ProductController::class, 'card'])
     ->name('product.card');
+Route::get('/product/buy/{code}', [ProductController::class, 'buy'])
+    ->name('product.buy');
+Route::get('/orders', [OrdersController::class, 'showOrders'])
+    ->name('orders.show');
+Route::post('/order/create', [OrdersController::class, 'createOrder'])
+    ->name('order.create');
